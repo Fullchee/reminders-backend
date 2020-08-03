@@ -28,7 +28,7 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.links (
-    id integer,
+    id SERIAL PRIMARY KEY,
     keywords text,
     title text,
     url text,
