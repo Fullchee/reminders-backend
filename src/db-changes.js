@@ -12,11 +12,19 @@ function sequelize(sql) {
   };
 }
 
-exports.getRandomLink = sequelize(`
-SELECT * 
-FROM links
-ORDER BY RANDOM()
-LIMIT 1`);
+exports.getRandomLink = (req, res) => {
+  pool.query(`
+  SELECT * 
+  FROM links
+  ORDER BY RANDOM()
+  LIMIT 1`, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log(results);
+    res.status(200).json(results.rows[0]);
+  });
+};
 
 exports.getAllLinks = sequelize(`
 SELECT *
