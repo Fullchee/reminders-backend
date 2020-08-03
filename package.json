@@ -9,7 +9,9 @@
     "backupdb": "rm links_dump.sql && pg_dump -f links_dump.sql --table public.links reminders",
     "restoredb": "psql -d reminders -f links_dump.sql",
     "dbconnect": "psql reminders fullchee",
-    "droplinks": "psql -c \"DROP TABLE links\" reminders"
+    "droplinks": "psql -c \"DROP TABLE links\" reminders",
+    "dbprodconnect": "heroku pg:psql postgresql-contoured-78783 --app fullchee-reminders-backend",
+    "restoreproddb": "cat links_dump.sql | yarn dbprodconnect"
   },
   "keywords": [],
   "author": "Fullchee Zhang <fullchee@gmail.com>",
