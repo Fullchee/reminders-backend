@@ -6,11 +6,13 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backupdb": "rm -rf links_dump.sql && pg_dump -f links_dump.sql --table public.links reminders",
+    "restoredb": "psql -d reminders -f links_dump.sql",
+    "dbconnect": "psql reminders fullchee"
   },
   "keywords": [],
   "author": "Fullchee Zhang <fullchee@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
