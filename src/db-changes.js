@@ -6,6 +6,7 @@ function sequelize(sql) {
       if (error) {
         throw error;
       }
+      console.log(results);
       res.status(200).json(results.rows);
     });
   };

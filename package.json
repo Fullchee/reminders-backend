@@ -6,10 +6,13 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "deploy": "git push heroku master",
+
     "backupdb": "rm links_dump.sql && pg_dump -f links_dump.sql --table public.links reminders",
     "restoredb": "psql -d reminders -f links_dump.sql",
     "dbconnect": "psql reminders fullchee",
     "droplinks": "psql -c \"DROP TABLE links\" reminders",
+
     "dbprodconnect": "heroku pg:psql postgresql-contoured-78783 --app fullchee-reminders-backend",
     "restoreproddb": "cat links_dump.sql | yarn dbprodconnect"
   },
