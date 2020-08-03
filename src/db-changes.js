@@ -23,7 +23,6 @@ FROM links`);
 
 exports.addLink = (req, res) => {
   const { keywords, title, url, takeaways, last_accessed } = req.body;
-  console.log(req.body);
   pool.query(
     `INSERT INTO links (keywords, title, url, takeaways, last_accessed)
     VALUES ($1, $2, $3, $4, $5)`,
@@ -39,11 +38,10 @@ exports.addLink = (req, res) => {
 
 exports.updateLink = (req, res) => {
   const { id, keywords, title, url, takeaways, last_accessed } = req.body;
-  console.log(req.body);
   pool.query(
     `UPDATE links
-    SET keywords = $1, title = $2, url = $3, takeaways = $4, last_accessed = GETDATE())
-    WHERE id = $5`
+    SET keywords = $1, title = $2, url = $3, takeaways = $4, last_accessed = NOW()
+    WHERE id = $5`,
     [keywords, title, url, takeaways, id],
     (error, results) => {
       if (error) {

@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "backupdb": "rm -rf links_dump.sql && pg_dump -f links_dump.sql --table public.links reminders",
+    "backupdb": "rm links_dump.sql && pg_dump -f links_dump.sql --table public.links reminders",
     "restoredb": "psql -d reminders -f links_dump.sql",
-    "dbconnect": "psql reminders fullchee"
+    "dbconnect": "psql reminders fullchee",
+    "droplinks": "psql -c \"DROP TABLE links\" reminders"
   },
   "keywords": [],
   "author": "Fullchee Zhang <fullchee@gmail.com>",
