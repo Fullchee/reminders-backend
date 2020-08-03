@@ -6,6 +6,7 @@ const {
   getAllLinks,
   addLink,
   updateLink,
+  deleteLink,
 } = require("./db-changes.js");
 
 const app = express();
@@ -19,6 +20,7 @@ app.get("/links", getAllLinks);
 // app.get("/link/id", getLink);
 app.post("/add-link", addLink);
 app.post("/update-link", updateLink);
+app.post("/delete-link", deleteLink);
 
 // Start server
 app.listen(process.env.PORT || 3002, () => {

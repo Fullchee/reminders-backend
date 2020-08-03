@@ -51,3 +51,18 @@ exports.updateLink = (req, res) => {
     }
   );
 };
+
+exports.deleteLink = (req, res) => {
+  const { id } = req.body;
+  pool.query(
+    `DELETE FROM links
+     WHERE id = $1`,
+    [id],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json({ status: "success", message: `Link with id: ${id} deleted` });
+    }
+  );
+};
