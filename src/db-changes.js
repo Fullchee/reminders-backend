@@ -13,22 +13,45 @@ function sequelize(sql) {
 }
 
 exports.getRandomLink = (req, res) => {
-  pool.query(`
+  pool.query(
+    `
   SELECT * 
   FROM links
   ORDER BY RANDOM()
-  LIMIT 1`, (error, results) => {
-    if (error) {
-      throw error;
+  LIMIT 1`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results.rows[0]);
     }
-    console.log(results);
-    res.status(200).json(results.rows[0]);
-  });
+  );
 };
 
 exports.getAllLinks = sequelize(`
 SELECT *
 FROM links`);
+
+exports.getKeywords = (req, res) => {
+  pool.query(
+    `
+  SELECT DISTINCT keywords
+  FROM links`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      console.log(results.rows);
+      const keywords = new Set();
+      results.rows.forEach((obj) => {
+        const words = obj.keywords.split(",");
+        words.forEach((word) => keywords.add(word));
+      });
+      keywords.delete("");
+      res.status(200).json([...keywords]);
+    }
+  );
+};
 
 exports.addLink = (req, res) => {
   const { keywords, title, url, takeaways, last_accessed } = req.body;
@@ -71,7 +94,9 @@ exports.deleteLink = (req, res) => {
       if (error) {
         throw error;
       }
-      res.status(200).json({ status: "success", message: `Link with id: ${id} deleted` });
+      res
+        .status(200)
+        .json({ status: "success", message: `Link with id: ${id} deleted` });
     }
   );
 };

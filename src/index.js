@@ -7,6 +7,7 @@ const {
   addLink,
   updateLink,
   deleteLink,
+  getKeywords,
 } = require("./db-changes.js");
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.get("/random-link", getRandomLink);
 app.get("/links", getAllLinks);
+app.get("/keywords", getKeywords);
 // app.get("/link/id", getLink);
 app.post("/add-link", addLink);
 app.post("/update-link", updateLink);

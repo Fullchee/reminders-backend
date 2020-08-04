@@ -6,3 +6,5 @@
 - text searching!
 - postman tests on each endpoint
 - multiple dates! (create a new table of id, dates, then query to get the latest)
+- SSL & security
+  - https://www.taniarascia.com/node-express-postgresql-heroku/
