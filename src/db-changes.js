@@ -53,6 +53,39 @@ exports.getKeywords = (req, res) => {
   );
 };
 
+exports.getLink = (req, res) => {
+  // res.status(200).json(req.params.id);
+  pool.query(
+    `SELECT * 
+    FROM links 
+    WHERE id = $1
+    `,
+    [parseInt(req.params.id)],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results.rows[0]);
+    }
+  );
+};
+
+exports.searchText = (req, res) => {
+  pool.query(
+    `SELECT * 
+    FROM links
+    WHERE title LIKE '%' || $1 || '%' OR takeaways LIKE '%' || $1 || '%'
+    `,
+    [req.query.q],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results.rows);
+    }
+  );
+};
+
 exports.addLink = (req, res) => {
   const { keywords, title, url, takeaways, last_accessed } = req.body;
   pool.query(
