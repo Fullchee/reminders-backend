@@ -54,7 +54,14 @@ exports.getKeywords = (req, res) => {
 };
 
 exports.getLink = (req, res) => {
-  // res.status(200).json(req.params.id);
+  const id = parseInt(req.params.id);
+  if (Number.isNaN(id)) {
+    return res
+      .status(400)
+      .json(
+        `Improper id provided: ${req.params.id}. The id should be a non-negative number.`
+      );
+  }
   pool.query(
     `SELECT * 
     FROM links 
@@ -64,6 +71,9 @@ exports.getLink = (req, res) => {
     (error, results) => {
       if (error) {
         throw error;
+      }
+      if (results.rows.length === 0) {
+        return res.status(404).json(`No entry found with id: ${req.params.id}`);
       }
       res.status(200).json(results.rows[0]);
     }
