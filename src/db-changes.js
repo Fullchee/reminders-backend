@@ -1,4 +1,6 @@
 const { pool } = require("./config");
+const { body, check } = require("express-validator");
+
 
 function sequelize(sql) {
   return (req, res) => {

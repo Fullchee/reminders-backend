@@ -7,12 +7,10 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "deploy": "git push heroku master",
-
     "backupdb": "rm -f links_dump.sql && pg_dump -f links_dump.sql --table public.links reminders",
     "restoredb": "psql -d reminders -f links_dump.sql",
     "dbconnect": "psql reminders fullchee",
     "droplinks": "psql -c \"DROP TABLE links\" reminders",
-
     "dbprodconnect": "heroku pg:psql postgresql-contoured-78783 --app fullchee-reminders-backend",
     "restoreproddb": "cat links_dump.sql | yarn dbprodconnect",
     "backupproddb": "rm -f links_dump.sql && heroku pg:backups:capture && heroku pg:backups:download && pg_restore latest.dump -f links_dump.sql"
@@ -21,9 +19,13 @@
   "author": "Fullchee Zhang <fullchee@gmail.com>",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "express-validator": "^6.6.1",
+    "helmet": "^4.1.0",
     "pg": "^8.3.0"
   },
   "devDependencies": {

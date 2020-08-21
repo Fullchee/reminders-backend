@@ -1,6 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const helmet = require("helmet");
+const compression = require("compression");
+const rateLimit = require("express-rate-limit");
 const {
   getRandomLink,
   getAllLinks,
@@ -16,7 +19,22 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(compression());
+app.use(helmet());
+
+// TODO: only allow requests from the same domain
+// const isProduction = process.env.NODE_ENV === "production";
+// const origin = {
+//   origin: isProduction ? "https://fullchee-reminders.netlify.app" : "*",
+// };
+// app.use(cors(origin));
 app.use(cors());
+
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 60, // 60 requests,
+});
+app.use(limiter);
 
 app.get("/random-link", getRandomLink);
 app.get("/links", getAllLinks);
