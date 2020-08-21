@@ -6,3 +6,13 @@
 - SSL & security
   - https://www.taniarascia.com/node-express-postgresql-heroku/
   - authentication, only allow certain URLs to make requests to it
+
+
+.env file
+```
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+```

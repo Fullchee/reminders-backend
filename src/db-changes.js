@@ -83,12 +83,28 @@ exports.getLink = (req, res) => {
 };
 
 exports.searchText = (req, res) => {
+
+  // TODO: sanitize inputs
+  
+  // TODO: more complex queries, like multiple keywords
+  // const queries = [];
+  // let request = "";
+  // if (req.query.q) {
+    //   queries.push(`title LIKE '%' || ${req.query.q} || '%' OR takeaways LIKE '%' ||${req.query.q} || '%'`);
+  // }
+  // if (req.query.keyword) {
+  //   queries.push()
+  // }
+  // if (queries.length) {
+  //   request = "WHERE " + queries.join(" AND ");
+  // }
   pool.query(
     `SELECT * 
     FROM links
     WHERE title LIKE '%' || $1 || '%' OR takeaways LIKE '%' || $1 || '%'
+      AND keywords LIKE '%' || $2 || '%'
     `,
-    [req.query.q],
+    [req.query.q, req.query.keyword || ""],
     (error, results) => {
       if (error) {
         throw error;
