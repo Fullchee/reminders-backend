@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Node, Express & Postgres backend for reminders",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
@@ -12,8 +13,8 @@
     "dbconnect": "psql reminders fullchee",
     "droplinks": "psql -c \"DROP TABLE links\" reminders",
     "dbprodconnect": "heroku pg:psql postgresql-contoured-78783 --app fullchee-reminders-backend",
-    "restoreproddb": "cat links_dump.sql | yarn dbprodconnect",
-    "backupproddb": "rm -f links_dump.sql && heroku pg:backups:capture && heroku pg:backups:download && pg_restore latest.dump -f links_dump.sql"
+    "restoreproddb": "echo DROP TABLE \"public\".\"links\" | yarn dbprodconnect && cat links_dump.sql | yarn dbprodconnect",
+    "backupproddb": "rm -f links_dump.sql && rm -rf latest.dump && heroku pg:backups:capture && heroku pg:backups:download && pg_restore latest.dump -f links_dump.sql"
   },
   "keywords": [],
   "author": "Fullchee Zhang <fullchee@gmail.com>",
