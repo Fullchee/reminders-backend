@@ -85,12 +85,12 @@ exports.getLink = (req, res) => {
 exports.searchText = (req, res) => {
 
   // TODO: sanitize inputs
-  
+
   // TODO: more complex queries, like multiple keywords
   // const queries = [];
   // let request = "";
   // if (req.query.q) {
-    //   queries.push(`title LIKE '%' || ${req.query.q} || '%' OR takeaways LIKE '%' ||${req.query.q} || '%'`);
+  //   queries.push(`title LIKE '%' || ${req.query.q} || '%' OR takeaways LIKE '%' ||${req.query.q} || '%'`);
   // }
   // if (req.query.keyword) {
   //   queries.push()
@@ -122,7 +122,7 @@ exports.addLink = (req, res) => {
     [keywords, title, url, takeaways, last_accessed],
     (error, results) => {
       if (error) {
-        throw error;
+        res.status(400).json({ status: "failure", message: `Duplicate url or id provided` })
       }
       res.status(201).json({ status: "success", message: "Link added" });
     }
