@@ -8,7 +8,6 @@ function sequelize(sql) {
       if (error) {
         throw error;
       }
-      console.log(results);
       res.status(200).json(results.rows);
     });
   };
@@ -43,7 +42,6 @@ exports.getKeywords = (req, res) => {
       if (error) {
         throw error;
       }
-      console.log(results.rows);
       const keywords = new Set();
       results.rows.forEach((obj) => {
         const words = obj.keywords.split(",");
@@ -101,10 +99,11 @@ exports.searchText = (req, res) => {
   pool.query(
     `SELECT * 
     FROM links
-    WHERE title LIKE '%' || $1 || '%' OR takeaways LIKE '%' || $1 || '%'
+    WHERE (title LIKE '%' || $1 || '%' OR takeaways LIKE '%' || $1 || '%')
       AND keywords LIKE '%' || $2 || '%'
+      AND url LIKE '%' || $3 || '%'
     `,
-    [req.query.q, req.query.keyword || ""],
+    [req.query.q || "", req.query.keyword || "", req.query.url || ""],
     (error, results) => {
       if (error) {
         throw error;
