@@ -9,9 +9,8 @@
     "dev": "nodemon src/index.js",
     "deploy": "git push heroku master",
     "backupdb": "rm -f links_dump.sql && pg_dump -f links_dump.sql --table public.links reminders",
-    "restoredb": "psql -d reminders -f links_dump.sql",
+    "restoredb": "psql -c \"DROP TABLE links\" reminders && psql -d reminders -f links_dump.sql",
     "dbconnect": "psql reminders fullchee",
-    "droplinks": "psql -c \"DROP TABLE links\" reminders",
     "dbprodconnect": "heroku pg:psql postgresql-contoured-78783 --app fullchee-reminders-backend",
     "restoreproddb": "echo DROP TABLE \"public\".\"links\" | yarn dbprodconnect && cat links_dump.sql | yarn dbprodconnect",
     "backupproddb": "rm -f links_dump.sql && rm -rf latest.dump && heroku pg:backups:capture && heroku pg:backups:download && pg_restore latest.dump -f links_dump.sql"

@@ -122,7 +122,7 @@ exports.addLink = (req, res) => {
     [keywords, title, url, takeaways, last_accessed],
     (error, results) => {
       if (error) {
-        res.status(400).json({ status: "failure", message: `Duplicate url or id provided` })
+        return res.status(400).json({ status: "failure", message: `Duplicate url or id provided` })
       }
       res.status(201).json({ status: "success", message: "Link added" });
     }
@@ -138,7 +138,7 @@ exports.updateLink = (req, res) => {
     [keywords, title, url, takeaways, id],
     (error, results) => {
       if (error) {
-        throw error;
+        return res.status(400).json({ status: "failure", message: `Duplicate url provided` })
       }
       res.status(200).json({ status: "success", message: "Link updated" });
     }
