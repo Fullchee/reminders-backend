@@ -116,8 +116,8 @@ exports.searchText = (req, res) => {
 exports.addLink = (req, res) => {
   const { keywords, title, url, takeaways, last_accessed } = req.body;
   pool.query(
-    `INSERT INTO links (keywords, title, url, takeaways, last_accessed)
-    VALUES ($1, $2, $3, $4, $5)`,
+    `INSERT INTO links (id, keywords, title, url, takeaways, last_accessed)
+    VALUES (DEFAULT, $1, $2, $3, $4, $5)`,
     [keywords, title, url, takeaways, last_accessed],
     (error, results) => {
       if (error) {
@@ -158,6 +158,9 @@ exports.deleteLink = (req, res) => {
     (error, results) => {
       if (error) {
         throw error;
+      }
+      else if (results.rowCount === 0) {
+        return res.status(400).json({ status: "failure", message: `Link with id: ${id} doesn't exist` })
       }
       res
         .status(200)

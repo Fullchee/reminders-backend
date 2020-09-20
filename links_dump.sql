@@ -33,7 +33,6 @@ CREATE TABLE "public"."links" (
     "last_accessed" "date"
 );
 
-
 ALTER TABLE public.links OWNER TO dxzihgxerkgfkd;
 
 --
@@ -152,3 +151,5 @@ ALTER TABLE ONLY "public"."links"
 -- PostgreSQL database dump complete
 --
 
+
+SELECT setval('public.links_id_seq', max(id)) FROM public.links;
