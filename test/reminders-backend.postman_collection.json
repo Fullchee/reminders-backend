@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "3ab771c6-581a-4828-b48a-bab8d2d56c9e",
+		"name": "reminders-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3002/random-link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e5863203-2866-48a3-81fa-477673e54c1d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/random-link",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"random-link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3002/keywords",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/keywords",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"keywords"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3002/link/3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/link/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"link",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3002/link/-1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/link/-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"link",
+						"-1"
+					]
+				},
+				"description": "id not found"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3002/link/asdf",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/link/asdf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"link",
+						"asdf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3002/search?q=%s",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/search?q=Malcolm",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Malcolm"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3002/search?q=%s Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/search?url=\"youtube\"",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "\"youtube\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3002/delete-link",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/delete-link",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"delete-link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3002/update-link",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"id\": 14,\n\"keywords\": \"\",\n\"lastAccessed\": \"294 days ago\",\n\"last_accessed\": \"2019-11-05T00:00:00.000Z\",\n\"takeaways\": \"\",\n\"title\": \"Hidden Brain Smoke and Mirrors\",\n\"url\": \"https://play.podtrac.com/npr-510308/ondemand.npr.org/anon.npr-mp3/npr/hiddenbrain/2016/06/20160630_hiddenbrain_episode37.mp3?orgId=1&topicId=1128&aggIds=423302056&d=1502&story=484214571&dl=1&siteplayer=true&dl=1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/update-link",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"update-link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3002/update-link duplicate url",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"id\": 2,\n\"keywords\": \"\",\n\"lastAccessed\": \"294 days ago\",\n\"last_accessed\": \"2019-11-05T00:00:00.000Z\",\n\"takeaways\": \"\",\n\"title\": \"Hidden Brain Smoke and Mirrors\",\n\"url\": \"https://play.podtrac.com/npr-510308/ondemand.npr.org/anon.npr-mp3/npr/hiddenbrain/2016/06/20160630_hiddenbrain_episode37.mp3?orgId=1&topicId=1128&aggIds=423302056&d=1502&story=484214571&dl=1&siteplayer=true&dl=1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/update-link",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"update-link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3002/add-link",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"id\": 14,\n\"keywords\": \"\",\n\"lastAccessed\": \"294 days ago\",\n\"last_accessed\": \"2019-11-05T00:00:00.000Z\",\n\"takeaways\": \"\",\n\"title\": \"Hidden Brain Smoke and Mirrors\",\n\"url\": \"https://play.podtrac.com/npr-510308/ondemand.npr.org/anon.npr-mp3/npr/hiddenbrain/2016/06/20160630_hiddenbrain_episode37.mp3?orgId=1&topicId=1128&aggIds=423302056&d=1502&story=484214571&dl=1&siteplayer=true&dl=1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/add-link",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"add-link"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

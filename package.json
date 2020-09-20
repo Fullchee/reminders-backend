@@ -13,7 +13,8 @@
     "dbconnect": "psql reminders fullchee",
     "dbprodconnect": "heroku pg:psql postgresql-contoured-78783 --app fullchee-reminders-backend",
     "restoreproddb": "echo DROP TABLE \"public\".\"links\" | yarn dbprodconnect && cat links_dump.sql | yarn dbprodconnect",
-    "backupproddb": "rm -f links_dump.sql && rm -rf latest.dump && heroku pg:backups:capture && heroku pg:backups:download && pg_restore latest.dump -f links_dump.sql"
+    "backupproddb": "rm -f links_dump.sql && rm -rf latest.dump && heroku pg:backups:capture && heroku pg:backups:download && pg_restore latest.dump -f links_dump.sql",
+    "test": "newman run test/reminders-backend.postman_collection.json"
   },
   "keywords": [],
   "author": "Fullchee Zhang <fullchee@gmail.com>",
@@ -29,6 +30,7 @@
     "pg": "^8.3.0"
   },
   "devDependencies": {
+    "newman": "^5.2.0",
     "nodemon": "^2.0.4"
   }
 }
