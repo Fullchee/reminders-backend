@@ -36,6 +36,7 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+app.get("/ping", () => res.status(200).json("pong!"));
 app.get("/random-link", getRandomLink);
 app.get("/links", getAllLinks);
 app.get("/keywords", getKeywords);
