@@ -117,14 +117,15 @@ exports.addLink = (req, res) => {
   const { keywords, title, url, takeaways, last_accessed } = req.body;
   pool.query(
     `INSERT INTO links (id, keywords, title, url, takeaways, last_accessed)
-    VALUES (DEFAULT, $1, $2, $3, $4, $5)`,
+    VALUES (DEFAULT, $1, $2, $3, $4, $5)
+    RETURNING id`,
     [keywords, title, url, takeaways, last_accessed],
     (error, results) => {
       if (error) {
         console.log(error);
         return res.status(400).json({ status: "failure", message: `Couldn't add link: duplicate url or id provided` })
       }
-      res.status(201).json({ status: "success", message: "Link added" });
+      res.status(201).json({ status: "success", id: results.rows[0].id, message: "Link added" });
     }
   );
 };
