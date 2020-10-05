@@ -27,7 +27,6 @@ const origin = {
   origin: isProduction ? "https://fullchee-reminders.netlify.app" : "*",
 };
 app.use(cors(origin));
-// app.use(cors());
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
