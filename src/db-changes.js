@@ -131,7 +131,7 @@ exports.addLink = (req, res) => {
 };
 
 exports.updateLink = (req, res) => {
-  const { id, keywords, title, url, takeaways, last_accessed } = req.body;
+  const { id, keywords, title, url, takeaways } = req.body;
   pool.query(
     `UPDATE links
     SET keywords = $1, title = $2, url = $3, takeaways = $4, last_accessed = NOW()
@@ -145,7 +145,7 @@ exports.updateLink = (req, res) => {
       else if (results.rowCount === 0) {
         return this.addLink(req, res);
       }
-      res.status(200).json({ status: "success", message: "Link updated" });
+      res.status(200).json({ status: "success", id: id, message: "Link updated" });
     }
   );
 };
