@@ -122,7 +122,6 @@ exports.addLink = (req, res) => {
     [keywords, title, url, takeaways, last_accessed],
     (error, results) => {
       if (error) {
-        console.log(error);
         return res.status(400).json({ status: "failure", message: `Couldn't add link: duplicate url or id provided` })
       }
       res.status(201).json({ status: "success", id: results.rows[0].id, message: "Link added" });
@@ -142,8 +141,9 @@ exports.updateLink = (req, res) => {
         console.log(error);
         return res.status(400).json({ status: "failure", message: `Couldn't update link: duplicate url provided` })
       }
+      // rowCount will be 0 if don't change any values
       else if (results.rowCount === 0) {
-        return this.addLink(req, res);
+        return res.status(200).json({ status: "success", id: id, message: "No change made to the link" });
       }
       res.status(200).json({ status: "success", id: id, message: "Link updated" });
     }
