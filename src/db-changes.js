@@ -100,10 +100,8 @@ exports.searchText = (req, res) => {
     `SELECT * 
     FROM links
     WHERE (title LIKE '%' || $1 || '%' OR takeaways LIKE '%' || $1 || '%')
-      AND keywords LIKE '%' || $2 || '%'
-      AND url LIKE '%' || $3 || '%'
     `,
-    [req.query.q || "", req.query.keyword || "", req.query.url || ""],
+    [req.query.q || ""],
     (error, results) => {
       if (error) {
         throw error;
