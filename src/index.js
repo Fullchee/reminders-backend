@@ -13,7 +13,7 @@ const {
   addLink,
   updateLink,
   deleteLink,
-} = require("./db-changes.js");
+} = require("./links.js");
 
 const app = express();
 
