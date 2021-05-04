@@ -11,6 +11,23 @@
 
 ## Install
 
+1. Install yarn v1
+2. Download the db from heroku (TODO: just get a dump from production)
+   1. `psql -U postgres -f db/links_dump.sql`
+   2. `psql -U postgres -f db/post-restore.sql`
+3. Create .env
+
+
+**.env file**
+```
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_DATABASE=postgres
+```
+
+
 ```bash
 yarn
 yarn start
@@ -29,11 +46,3 @@ yarn start
   - create a GIN index on it
 
 
-.env file
-```
-DB_USER=
-DB_PASSWORD=
-DB_HOST=
-DB_PORT=
-DB_DATABASE=
-```
