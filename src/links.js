@@ -22,7 +22,8 @@ exports.getRandomLink = (req, res) => {
   LIMIT 1`,
     (error, results) => {
       if (error) {
-        throw error;
+        console.log(error)
+        // throw error;
       }
       res.status(200).json(results.rows[0]);
     }
