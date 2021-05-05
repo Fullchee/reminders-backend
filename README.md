@@ -13,8 +13,9 @@
 
 1. Install yarn v1
 2. Download the db from heroku (TODO: just get a dump from production)
-   1. `psql -U postgres -f db/links_dump.sql`
-   2. `psql -U postgres -f db/post-restore.sql`
+   1. pg_dump -d `heroku config:get DATABASE_URL --app fullchee-reminders-backend` -Fc > reminders.dump
+   2. `psql -U postgres -f db/links_dump.sql`
+   3. `psql -U postgres -f db/post-restore.sql`
 3. Create .env
 
 
