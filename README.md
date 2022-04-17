@@ -17,6 +17,7 @@
    2. `psql -U postgres -f db/links_dump.sql`
    3. `psql -U postgres -f db/post-restore.sql`
 3. Create .env
+   1. `cp sample.env .env`
 
 
 **.env file**
