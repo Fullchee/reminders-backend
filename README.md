@@ -18,24 +18,14 @@
    3. `psql -U postgres -f db/post-restore.sql`
 3. Create .env
    1. `cp sample.env .env`
-
-
-**.env file**
-```
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_HOST=localhost
-DB_PORT=5432
-DB_DATABASE=postgres
-```
-
-
-```bash
-yarn
-yarn start
-```
+4. Install dependencies
+   1. `yarn`
+5. Start server
+   1. `yarn start`
 
 # Todos
+
+- on Todoist
 - postman tests on each endpoint
 - keyword search doesn't work
 - multiple dates! (create a new table of id, dates, then query to get the latest)
@@ -46,5 +36,3 @@ yarn start
   - https://youtu.be/szfUbzsKvtE?t=216
   - create an column with the tsvector
   - create a GIN index on it
-
-
